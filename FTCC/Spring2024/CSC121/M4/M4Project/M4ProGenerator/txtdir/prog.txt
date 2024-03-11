@@ -1,0 +1,6 @@
+CSC121-Python Programming
+CSC151-Java Programming
+DBA110-Database Concepts
+DBA120-Database Programming I
+NOS110-Operating System Concepts
+CTS285-Systems Analysis & Design

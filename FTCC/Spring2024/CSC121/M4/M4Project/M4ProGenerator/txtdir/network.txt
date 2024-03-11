@@ -1,0 +1,6 @@
+CTS120-Hardware/Software Support
+NOS120-Linux/UNIX Single User
+NOS230-Windows Administration I
+SEC110-Security Concepts
+NET125-Introduction to Networks
+NET126-Routing Basics

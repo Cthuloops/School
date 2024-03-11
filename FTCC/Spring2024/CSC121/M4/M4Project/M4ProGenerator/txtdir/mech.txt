@@ -1,0 +1,6 @@
+ELC112-DC/AC Electricity
+ELC117-Motors & Controls
+ELC228-PLC Applications
+ISC112-Industrial Safety
+BPR115-Electric/Fluid Power Diagrams
+HYD110-Hydraulics/Pneumatics I
