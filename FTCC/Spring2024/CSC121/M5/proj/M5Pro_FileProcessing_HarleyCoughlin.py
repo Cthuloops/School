@@ -88,7 +88,6 @@ def get_int(transaction_field):
         except Exception:
             print()
             print("Not a valid integer\n")
-            print()
             continue
         if user_input > 0:
             not_valid = False
@@ -250,7 +249,7 @@ def main():
         keep_going = False
         print("Program now exiting")
     finally:
-        f.close
+        f.close()
 
     # loop for the main menu
     while keep_going:
