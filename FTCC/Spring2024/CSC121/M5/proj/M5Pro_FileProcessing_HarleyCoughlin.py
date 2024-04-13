@@ -5,6 +5,7 @@
 
 import csv
 
+
 # the main menu
 def main_menu():
     print()
@@ -16,9 +17,10 @@ def main_menu():
     print("5) Exit                                                  |")
     print(f"{'':-^58}\n")
 
+
 # read the csv
 def get_sales_list(filename):
-    # list for packing the csv data 
+    # list for packing the csv data
     sales_list = []
     # open the file for reading
     with open(filename, "rt") as csv_file:
@@ -28,6 +30,7 @@ def get_sales_list(filename):
             # add the dicts to the sales list
             sales_list.append(row)
     return sales_list
+
 
 # pretty print the sales list
 def print_sales_list(sales_list):
@@ -43,6 +46,7 @@ def print_sales_list(sales_list):
             value_list.append(value)
         print(f"{value_list[0]:<4}{value_list[1]:<11}{value_list[2]:<7}{value_list[3]:<7}{value_list[4]:<6}{value_list[5]:<6}")
 
+
 # add new transactions to the csv
 def add_new_transactions(filename, sales_list):
     # fieldnames for the dictwriter
@@ -57,7 +61,7 @@ def add_new_transactions(filename, sales_list):
         # dict for user input
         transaction = {}
 
-        while(keep_going):
+        while (keep_going):
             # creating the dict from user input
             # get the transaction info
             transaction["#"] = get_int(transaction_field="#")
@@ -67,7 +71,7 @@ def add_new_transactions(filename, sales_list):
             transaction["units"] = get_int(transaction_field="units")
             transaction["price"] = get_float()
             print()
-            
+
             # write the finished transaction to the file
             writer.writerow(transaction)
 
@@ -75,6 +79,7 @@ def add_new_transactions(filename, sales_list):
             choice = input("Enter n/N to quit or press enter to continue: ")
             if choice == 'n' or choice == 'N':
                 keep_going = False
+
 
 # get/validate int
 def get_int(transaction_field):
@@ -97,7 +102,8 @@ def get_int(transaction_field):
 
     return user_input
 
-# really just going to let the user do basically whatever here as long as the 
+
+# really just going to let the user do basically whatever here as long as the
 # format is correct
 def get_date():
     not_valid = True
@@ -131,6 +137,7 @@ def get_date():
 
         return date
 
+
 # at least this one is super simple
 def get_float():
     not_valid = True
@@ -147,6 +154,7 @@ def get_float():
             print()
             print("Please enter a value larger than 0\n")
     return price
+
 
 # find the totals for the unique product ids in the sales list
 def totals_per_product(sales_list):
@@ -172,12 +180,14 @@ def totals_per_product(sales_list):
 
     return products
 
+
 # pretty print the results of total_sales_per_product
 def print_totals_per_product(products):
     print("Product | Total")
     print(f"{'':-^16}")
     for product, total in products.items():
         print(f"{product:<9}${total:^7.2f}")
+
 
 # get total units and total sales per customer
 def totals_per_customer(sales_list):
@@ -215,14 +225,16 @@ def totals_per_customer(sales_list):
 
     return customer_list
 
+
 # print the customer totals to a txt file
 def totals_per_customer_file(customer_list):
-        with open("customer_totals.txt", 'w') as file:
-            print(f"{'Customer ID':<13}{'Total Units Sold':<18}{'Total Sales':<13}", file=file)
-            print(f"{'':-^42}", file=file)
-            for customer in customer_list:
-                print(f"{customer['custID']:0>4}{'':<9}{customer['units']:<18}${customer['price']:<13.2f}", file=file)
-        print("customer_totals.txt created/updated")
+    with open("customer_totals.txt", 'w') as file:
+        print(f"{'Customer ID':<13}{'Total Units Sold':<18}{'Total Sales':<13}", file=file)
+        print(f"{'':-^42}", file=file)
+        for customer in customer_list:
+            print(f"{customer['custID']:0>4}{'':<9}{customer['units']:<18}${customer['price']:<13.2f}", file=file)
+    print("customer_totals.txt created/updated")
+
 
 def execute_menu_option(option, filename):
     # always update the sales list
@@ -236,11 +248,12 @@ def execute_menu_option(option, filename):
         print_totals_per_product(totals_per_product(sales_list))
     elif option == 4:
         totals_per_customer_file(totals_per_customer(sales_list))
-                
+
+
 def main():
     keep_going = True
     filename = "sales.csv"
-    
+
     # just checking if the file exists
     try:
         f = open(filename)
