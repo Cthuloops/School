@@ -1,6 +1,6 @@
 # this program is a continuation of M4 project and performs functions on a list of dicts
 # 04/13/2024
-# CSC121 M6Proj
+# CSC121 M6Lab
 # Harley Coughlin
 
 import m6_functions as m6fun
