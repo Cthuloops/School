@@ -122,6 +122,9 @@ def main():
         elif option == 4:
             # get the search id
             student_id = m6fun.get_id(student_registry)
+            # if the user quits, rerun menu
+            if student_id is None:
+                continue
             # isolate the student from the registry
             student = m6fun.create_student_dict(student_registry, student_id)
             # display/write the student
