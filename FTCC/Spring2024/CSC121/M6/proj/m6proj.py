@@ -16,7 +16,7 @@ def extract_data():
         # create reader
         reader = csv.DictReader(csv_file)
         for line in reader:
-            world_series_winners.append(line.strip())
+            world_series_winners.append(line)
 
         return world_series_winners
 
@@ -31,7 +31,7 @@ def create_set(world_series_winners):
     # for the data in the list
     for line in world_series_winners:
         # add the team name to the set
-        team_names.add(line['Name'])
+        team_names.add(line['Name'].strip())
 
     # for the team in the set
     for team in team_names:
@@ -57,6 +57,7 @@ def create_set(world_series_winners):
 # the main menu
 def print_main_menu():
     """Just prints a menu"""
+    print()
     print(f"{'Menu':-^54}")
     print("1) Search by Team (list number of times and years won)")
     print("2) Search by Year")
@@ -88,12 +89,55 @@ def get_menu_option():
     return option
 
 
-# airoenstoiaernstoieanrstoieanr
+# this is the menu for option 1, search by team
+def team_search_menu(team_names):
+    """Creates a menu and takes an input for option, a string or None"""
+    # sentinel value
+    not_done = True
+    while not_done:
+        print()
+        print(f"{'Search by Team Menu':-<32}")
+        print("[L]ist Team Names")
+        print("[E]nter Team Name to search for")
+        print("[R]eturn to Main Menu")
+        print(f"{'':-^32}")
+        option = input("(l/e/r) > ")
+
+        # print the team names if L is selected
+        if option.lower() == 'l':
+            print()
+            for team in team_names:
+                print(team.title())
+            continue
+        # call get team name and return the input or None
+        elif option.lower() == 'e':
+            team_name = get_team_name(team_names)
+            return team_name
+        # exit the function returning to menu
+        elif option.lower() == 'r':
+            not_done = False
+
+
+# quick and easy getter
 def get_team_name(team_names):
-    """Prompts user to enter a team name to search for, returns a string"""
-    team_name = input("Enter team to search for or enter q to quit: ")
-    if team_name.lower() == 'q':
-        return None
+    """Gets input, checks against team list, returns a string or None"""
+    not_done = True
+    while not_done:
+        team_name = input("Enter team to search for or enter q to quit: ")
+        if team_name.lower() == 'q':
+            return None
+        elif not team_in_winners(team_name, team_names):
+            print("Team not found\n")
+        else:
+            return team_name
+
+
+# checks if the team_name is present in team_names
+def team_in_winners(team_name, team_names):
+    for team in team_names:
+        if team_name.casefold() == team:
+            return True
+    return False
 
 
 # search for the team, returns tuple
@@ -110,7 +154,7 @@ def search_by_team(team_name, world_series_winners):
 
 
 # pretty print the search_by_team results
-def print_search_results(team_search_results):
+def print_team_search_results(team_search_results):
     """Prints results of search_by_team with formatting"""
     print(team_search_results)
 
@@ -121,6 +165,8 @@ def main():
     # data extraction from the csv file
     try:
         team_names, world_series_winners = create_set(extract_data())
+        # alphabetical order looks nicer
+        team_names = sorted(team_names)
     except Exception as err:
         print()
         print("Something went wrong: " + str(err) + "\n")
@@ -134,9 +180,11 @@ def main():
         # get the option
         option = get_menu_option()
         if option == 1:
-            team_name = input("Please enter team name to search for: ")
-            print_search_results(search_by_team(team_name, world_series_winners))
+            team_name = team_search_menu(team_names)
+            if team_name is None:
+                continue
         if option == 4:
+            print()
             print("Now exiting")
             keep_going = False
 
