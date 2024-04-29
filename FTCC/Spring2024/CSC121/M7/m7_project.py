@@ -84,19 +84,55 @@ class Student():
         return email
 
     def get_stu_id(self):
+        """Used to access stu_id attribute
+
+        Returns
+        -------
+        value referenced in attribute __stu_id
+        """
         return self.__stu_id
 
     def get_first_name(self):
+        """Used to access first_name attribute
+
+        Returns
+        -------
+        value referenced in attribute __first_name
+        """
         return self.__first_name
 
     def get_last_name(self):
+        """Used to access last_name attribute
+
+        Returns
+        -------
+        value referenced in attribute __last_name
+        """
         return self.__last_name
 
     def get_major(self):
+        """Used to access major attribute
+
+        Returns
+        -------
+        value referenced in attribute __major
+        """
         return self.__major
 
     def get_courses(self):
+        """Used to access courses attribute
+
+        Returns
+        -------
+        value referenced in attribute __courses
+        """
         return self.__courses
 
     def get_email(self):
+        """Used to access email attribute
+
+        Returns
+        -------
+        value referenced in attribute __email
+        """
         return self.__email
