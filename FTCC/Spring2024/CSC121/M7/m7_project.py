@@ -69,7 +69,7 @@ class Student():
     def set_email(self, __stu_id, __last_name, domain_ext="student.faytechcc.edu"):
         """Sets an email address for the Student
 
-        If the argument 'atdomext' is passed, then the 
+        If the argument 'domain_ext' is passed, then the domain and extenstion of the email is changed
 
         Parameters
         ----------
