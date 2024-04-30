@@ -3,6 +3,10 @@
 # CSC121 M7Project OOP
 # Harley Coughlin
 
+
+import csv
+
+
 # let's make this class I guess
 class Student():
     """A class to reprsent a Student
@@ -136,3 +140,5 @@ class Student():
         value referenced in attribute __email
         """
         return self.__email
+
+
