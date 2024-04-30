@@ -226,11 +226,67 @@ def write_instances(student_list, filename="student_registry_content.csv"):
             for student in student_list:
                 # packing the info from the student class into a list, as tuples apparently
                 values = str(student.get_stu_id()), student.get_first_name(), student.get_last_name(), student.get_major(), student.get_email()
+                # write the student row to the csv
                 writer.writerow(values)
     except Exception as err:
         print("Something went wrong: " + str(err))
 
 
+# menu for the progam
+def menu():
+    print()
+    print("Menu------------------------")
+    print("1) Display Registry Content")
+    print("2) Display Course Roster")
+    print("3) List of Students by Major")
+    print("4) Student Search by Id")
+    print("5) Exit")
+    print("----------------------------\n")
+
+
+# get int input, otherwise reprompt
+def get_input():
+    valid_option = False
+    # loop to obtain input
+    while (not valid_option):
+        # capturing input as string so no error on incorrect input type
+        option = input("Choose an option: ")
+        print()
+        # checking if string is only digits, otherwise reprompt
+        if option.isnumeric():
+            # converting option into int
+            option = int(option)
+            # checking if input is in range of menu options
+            if option in range(1, 6):
+                valid_option = True
+            else:
+                print("Invalid option please try again.")
+                print()
+        else:
+            print("Invalid option please try again.")
+    return option
+
+
+# main, calls menu and functions
+def main():
+    keep_going = True
+    while (keep_going):
+        # print the menu before choosing option and after choosing an option except exit
+        menu()
+        option = get_input()
+        # calls functions depending on the option chosen
+        if option == 1:
+            m7_functions.display_registry_content(student_registry)
+        elif option == 2:
+            m7_functions.display_course_roster(student_registry)
+        elif option == 3:
+            m7_functions.list_by_major(student_registry)
+        elif option == 4:
+            m7_functions.search_by_id(student_registry)
+        elif option == 5:
+            print("Progam will now exit\n")
+            keep_going = False
+
+
 if __name__ == "__main__":
-    students = create_instances(student_registry)
-    write_instances(students)
+    main()
