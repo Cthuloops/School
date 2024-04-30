@@ -261,10 +261,9 @@ def get_input():
             if option in range(1, 6):
                 valid_option = True
             else:
-                print("Invalid option please try again.")
-                print()
+                print("Invalid option please try again.\n")
         else:
-            print("Invalid option please try again.")
+            print("Invalid option please try again.\n")
     return option
 
 
@@ -282,16 +281,21 @@ def main():
         option = get_input()
         # calls functions depending on the option chosen
         if option == 1:
+            # write the list to a file
             write_instances(student_list)
+            # display the contents of the list
             m7fun.display_registry_content(student_list)
         elif option == 2:
+            # displays the student information for a course
             m7fun.display_course_roster(student_list)
         elif option == 3:
+            # list of student for a major
             m7fun.list_by_major(student_list)
         elif option == 4:
+            # student associated w/ an id
             m7fun.search_by_id(student_list)
         elif option == 5:
-            print("Progam will now exit\n")
+            print("Progam will now exit")
             keep_going = False
 
 
