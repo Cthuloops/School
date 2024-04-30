@@ -6,6 +6,48 @@
 
 import csv
 
+# initializing the dict list (20 dicts)
+student_registry = [{"student_id": "12376", "first_name": "michael", "last_name": "anderson", "major": "mech", "courses": ["mat143-quantitative literacy", "com120-intro interpersonal communication", "elc228-plc applications", "bpr115-electric/fluid power diagrams"]},
+
+                    {"student_id": "12415", "first_name": "Andrew", "last_name": "Jackson", "major": "UI/UX", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "DME110-Intro to Digital Media", "DME115-Graphic Design Tools"]},
+
+                    {"student_id": "12302", "first_name": "Michelle", "last_name": "Robinson", "major": "UI/UX", "courses": ["ENG111-Writing and Inquiry", "MAT143-Quantitative Literacy", "DME115-Graphic Design Tools", "WEB110-Internet/Web Fundamentals"]},
+
+                    {"student_id": "12252", "first_name": "Carol", "last_name": "Flores", "major": "Mech", "courses": ["ENG111-Writing", "COM120-Intro Interpersonal Communication", "MAT143-Quantitative Literacy", "ELC228-PLC Applications"]},
+
+                    {"student_id": "12338", "first_name": "George", "last_name": "Brown", "major": "UI/UX", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "DME110-Intro to Digital Media", "DME115-Graphic Design Tools"]},
+
+                    {"student_id": "12556", "first_name": "Ronald", "last_name": "Harris", "major": "Mech", "courses": ["COM120-Intro Interpersonal Communication", "ENG114-Prof Research & Reporting", "BPR115-Electric/Fluid Power Diagrams", "HYD110-Hydraulics/Pneumatics I"]},
+
+                    {"student_id": "12645", "first_name": "Rebecca", "last_name": "Mitchell", "major": "Network", "courses": ["ENG111-Writing and Inquiry", "MAT143-Quantitative Literacy", "NOS120-Linux/UNIX Single User", "NOS230-Windows Administration I"]},
+
+                    {"student_id": "12046", "first_name": "Nicholas", "last_name": "Garcia", "major": "Programming", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "CSC121-Python Programming", "CSC151-Java Programming"]},
+
+                    {"student_id": "12082", "first_name": "Brandon", "last_name": "Adams", "major": "Programming", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "CSC121-Python Programming", "CSC151-Java Programming"]},
+
+                    {"student_id": "12366", "first_name": "Debra", "last_name": "Martinez", "major": "UI/UX", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "DME110-Intro to Digital Media", "DME115-Graphic Design Tools"]},
+
+                    {"student_id": "12011", "first_name": "Rachel", "last_name": "Rivera", "major": "Programming", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "CSC121-Python Programming", "CSC151-Java Programming"]},
+
+                    {"student_id": "12116", "first_name": "Diane", "last_name": "Clark", "major": "Network", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "CTS120-Hardware/Software Support", "NOS120-Linux/UNIX Single User"]},
+
+                    {"student_id": "12481", "first_name": "Jose", "last_name": "Lewis", "major": "UI/UX", "courses": ["ENG111-Writing and Inquiry", "COM120-Intro Interpersonal Communication", "DME115-Graphic Design Tools", "CTS115-Information Systems Business Concepts"]},
+
+                    {"student_id": "12931", "first_name": "Victoria", "last_name": "Wright", "major": "Mech", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "ELC112-DC/AC Electricity", "ELC117-Motors & Controls"]},
+
+                    {"student_id": "12283", "first_name": "Henry", "last_name": "Scott", "major": "Mech", "courses": ["MAT143-Quantitative Literacy", "PSY150-General Psychology", "ELC228-PLC Applications", "ISC112-Industrial Safety"]},
+
+                    {"student_id": "12212", "first_name": "Peter", "last_name": "Carter", "major": "Network", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "CTS120-Hardware/Software Support", "NOS120-Linux/UNIX Single User"]},
+
+                    {"student_id": "12018", "first_name": "Evelyn", "last_name": "Wilson", "major": "Mech", "courses": ["PSY150-General Psychology", "COM120-Intro Interpersonal Communication", "ISC112-Industrial Safety", "BPR115-Electric/Fluid Power Diagrams"]},
+
+                    {"student_id": "12165", "first_name": "Austin", "last_name": "Thompson", "major": "Programming", "courses": ["MAT143-Quantitative Literacy", "PSY150-General Psychology", "DBA110-Database Concepts", "DBA120-Database Programming I"]},
+
+                    {"student_id": "12548", "first_name": "Teresa", "last_name": "Martin", "major": "Mech", "courses": ["ACA122-College Transfer Success", "PSY150-General Psychology", "ELC112-DC/AC Electricity", "ISC112-Industrial Safety"]},
+
+                    {"student_id": "12181", "first_name": "Randy", "last_name": "Lopez", "major": "Mech", "courses": ["MAT143-Quantitative Literacy", "PSY150-General Psychology", "ELC228-PLC Applications", "ISC112-Industrial Safety"]}
+                    ]
+
 
 # let's make this class I guess
 class Student():
@@ -142,3 +184,7 @@ class Student():
         return self.__email
 
 
+def create_instance(student_dict):
+    """Converts a dict to a Student object, returns a list of Student instances"""
+    for student in student_registry:
+        pass
