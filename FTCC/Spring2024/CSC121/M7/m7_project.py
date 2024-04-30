@@ -70,6 +70,8 @@ class Student():
 
     Methods
     -------
+    set_email():
+        returns an email for the student
     get_stu_id():
         returns the student's id
     get_first_name():
@@ -84,7 +86,7 @@ class Student():
         returns the student's email
     """
 
-    def __init__(self, stu_id, first_name, last_name, major, courses):
+    def __init__(self, stu_id, first_name, last_name, major, courses, email):
         """Constructs all the necessary attributes for the Student object
 
         Parameters
@@ -106,7 +108,7 @@ class Student():
         self.__last_name = last_name
         self.__major = major
         self.__courses = courses
-        self.__email = Student.set_email(self, stu_id, last_name)
+        self.__email = email
 
     def __repr__(self, delim='\n'):
 
@@ -185,6 +187,11 @@ class Student():
 
 
 def create_instance(student_dict):
-    """Converts a dict to a Student object, returns a list of Student instances"""
+    """Converts a dict to a Student instance, returns a list of Student instances"""
+
+    # creating list for packing student instances
+    student_list = []
+    # for each student in the registry
     for student in student_registry:
-        pass
+        # create an instance of Student
+        
