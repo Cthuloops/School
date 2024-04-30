@@ -7,7 +7,7 @@
 import csv
 
 # initializing the dict list (20 dicts)
-student_registry = [{"student_id": "12376", "first_name": "michael", "last_name": "anderson", "major": "mech", "courses": ["mat143-quantitative literacy", "com120-intro interpersonal communication", "elc228-plc applications", "bpr115-electric/fluid power diagrams"]},
+student_registry = [{"student_id": "12376", "first_name": "Michael", "last_name": "Anderson", "major": "mech", "courses": ["mat143-quantitative literacy", "com120-intro interpersonal communication", "elc228-plc applications", "bpr115-electric/fluid power diagrams"]},
 
                     {"student_id": "12415", "first_name": "Andrew", "last_name": "Jackson", "major": "UI/UX", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "DME110-Intro to Digital Media", "DME115-Graphic Design Tools"]},
 
@@ -186,8 +186,9 @@ class Student():
         return self.__email
 
 
-def create_instance(student_registry):
-    """Converts a dict to a Student instance, returns a list of Student instances"""
+# create the student objects
+def create_instances(student_registry):
+    """Converts a dict to a Student instance, returns a list of Student objects"""
 
     # creating list for packing student instances
     student_list = []
@@ -200,7 +201,36 @@ def create_instance(student_registry):
     return student_list
 
 
+# write these objects to a csv file
+def write_instances(student_list, filename="student_registry_content.csv"):
+    """Writes the list created with create_instances to a csv file
+
+    If the argument 'filename' is passed, the filename for the csv created is changed
+
+    Parameters
+    ----------
+    student list : list[obj]
+        list of Student objects
+    filename : str, optional
+       optional, sets the name for the file created (default is student_registry_content.csv)
+    """
+
+    csv_header = ["Stu ID", "First Name", "Last Name", "Major", "Email"]
+    try:
+        with open(filename, 'w', newline='') as csv_file:
+            # create the csv writer
+            writer = csv.writer(csv_file)
+            # write the header
+            writer.writerow(csv_header)
+            # write the Student objects from student_list
+            for student in student_list:
+                # packing the info from the student class into a list, as tuples apparently
+                values = str(student.get_stu_id()), student.get_first_name(), student.get_last_name(), student.get_major(), student.get_email()
+                writer.writerow(values)
+    except Exception as err:
+        print("Something went wrong: " + str(err))
+
+
 if __name__ == "__main__":
-    students = create_instance(student_registry)
-    for student in students:
-        print(student)
+    students = create_instances(student_registry)
+    write_instances(students)
