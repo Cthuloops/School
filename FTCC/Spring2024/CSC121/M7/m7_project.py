@@ -4,6 +4,7 @@
 # Harley Coughlin
 
 
+import m7_functions as m7fun
 import csv
 
 # initializing the dict list (20 dicts)
@@ -269,6 +270,11 @@ def get_input():
 
 # main, calls menu and functions
 def main():
+    # I know the assignment says to call this for each option but that seems
+    # just a bit excessive to me. so call create instance at the start of main
+    # and pass the list to all the functions
+    student_list = create_instances(student_registry)
+
     keep_going = True
     while (keep_going):
         # print the menu before choosing option and after choosing an option except exit
@@ -276,13 +282,14 @@ def main():
         option = get_input()
         # calls functions depending on the option chosen
         if option == 1:
-            m7_functions.display_registry_content(student_registry)
+            write_instances(student_list)
+            m7fun.display_registry_content(student_list)
         elif option == 2:
-            m7_functions.display_course_roster(student_registry)
+            m7fun.display_course_roster(student_list)
         elif option == 3:
-            m7_functions.list_by_major(student_registry)
+            m7fun.list_by_major(student_list)
         elif option == 4:
-            m7_functions.search_by_id(student_registry)
+            m7fun.search_by_id(student_list)
         elif option == 5:
             print("Progam will now exit\n")
             keep_going = False
