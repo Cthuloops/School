@@ -86,7 +86,7 @@ class Student():
         returns the student's email
     """
 
-    def __init__(self, stu_id, first_name, last_name, major, courses, email):
+    def __init__(self, stu_id, first_name, last_name, major, courses):
         """Constructs all the necessary attributes for the Student object
 
         Parameters
@@ -108,13 +108,13 @@ class Student():
         self.__last_name = last_name
         self.__major = major
         self.__courses = courses
-        self.__email = email
+        self.__email = Student.set_email(self, stu_id, last_name)
 
     def __repr__(self, delim='\n'):
 
         return "ID: " + str(self.__stu_id) + delim + "First name: " + self.__first_name + delim + "Last name: " + self.__last_name + delim + "Major: " + self.__major + delim + "Email: " + self.__email
 
-    def set_email(self, __stu_id, __last_name, domain_ext="student.faytechcc.edu"):
+    def set_email(self, stu_id, last_name, domain_ext="student.faytechcc.edu"):
         """Sets an email address for the Student
 
         If the argument 'domain_ext' is passed, then the domain and extenstion of the email is changed
@@ -128,7 +128,7 @@ class Student():
         -------
         email (str) : email generated for the student
         """
-        email = self.__stu_id[-2:] + self.__last_name.lower() + '@' + domain_ext
+        email = str(stu_id[-2:]) + last_name.lower() + '@' + domain_ext
         return email
 
     def get_stu_id(self):
@@ -186,7 +186,7 @@ class Student():
         return self.__email
 
 
-def create_instance(student_dict):
+def create_instance(student_registry):
     """Converts a dict to a Student instance, returns a list of Student instances"""
 
     # creating list for packing student instances
@@ -194,4 +194,13 @@ def create_instance(student_dict):
     # for each student in the registry
     for student in student_registry:
         # create an instance of Student
-        
+        current_student = (Student(student["student_id"], student["first_name"], student["last_name"], student["major"], student["courses"]))
+        student_list.append(current_student)
+
+    return student_list
+
+
+if __name__ == "__main__":
+    students = create_instance(student_registry)
+    for student in students:
+        print(student)
