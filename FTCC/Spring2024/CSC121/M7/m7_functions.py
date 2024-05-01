@@ -235,7 +235,7 @@ def get_course_to_display(student_list):
                 # list for readability
                 option = int(option) - 1
                 # if the option is within the number of courses
-                if option in range(0, len(course_set)):
+                if option in range(len(course_set)):
                     # can't index into a set, so iterate through
                     for idx, course in enumerate(course_set):
                         # if the option selected matches the current index
@@ -263,6 +263,12 @@ def display_course_roster(student_list, course_to_display):
     course : str
         course to display students for
     """
+    # getting the length of course_to_display for formatting purposes
+    format_len = len(course_to_display)
+    # some formatting
+    print()
+    print(course_to_display)
+    print(f"{'':-^{format_len}}")
     # for each student in student_list
     for student in student_list:
         # get the courses for that student
