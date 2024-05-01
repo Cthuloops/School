@@ -102,8 +102,7 @@ def main():
             m7fun.write_instances(student_list)
         elif option == 2:
             # displays the student information for a course
-            # m7fun.display_course_roster(student_list)
-            print(m7fun.get_course_to_display(student_list))
+            m7fun.display_course_roster(student_list)
         elif option == 3:
             # list of student for a major
             m7fun.list_by_major(student_list)
