@@ -186,24 +186,68 @@ def write_instances(student_list, filename="student_registry_content.csv"):
         print("Something went wrong: " + str(err))
 
 
-# menu because i like it
-def display_course_roster_menu(student_list):
-    """Menu for display course roster"""
+def get_course_to_display(student_list):
+    """Displays a selection of courses, returns the course selected or None
 
-    print(f"{'Display Course Roster':-^29}")
-    print("1) Display available courses")
-    print("2) Search for course")
-    print("3) Return to Main Menu")
-    print(f"{'':-^29}")
+    Parameters
+    ----------
+    student_list : list[obj]
+        list of Student objects
 
-
-# lets get this bread
-def display_course_roster(student_list, course_to_search_for):
-    """Prints Students that have a course matching the search"""
-
-    course_to_search_for = "MAT143-Quantitative Literacy"
-
+    Returns
+    -------
+    course : str
+        the course name selected
+    None
+        user chose to return to main menu
+    """
+    # create a set of courses
+    course_set = set()
+    # for each student in the student list
     for student in student_list:
+        # get their courses
         courses = student.get_courses()
-        if course_to_search_for in courses:
-            print(student)
+        # for each course in the student's courses
+        for course in courses:
+            # add that course to the set
+            course_set.add(course)
+    # sort the course_set because i like it sorted
+    course_set = sorted(course_set)
+    # loop for printing courses and selecting a valid option
+    keep_going = True
+    while keep_going:
+        # not very clean code of me
+        # print a menu of course selection options
+        print()
+        print(f"{'Choose a Course':^48}")
+        print(f"{'':-^48}")
+        for idx, course in enumerate(course_set):
+            # labeling the courses so its easier to select one
+            print(f"{str(idx + 1):>2}) {course}")
+        print(f"{'':-^48}")
+        # get the input
+        option = input("Select an option or enter 'q' to return to main menu: ")
+        # check if returing to menu, returns None
+        if option.casefold() == 'q':
+            keep_going = False
+        else:
+            try:
+                # convert option to int
+                option = int(option) - 1
+                # if the option is within the number of courses
+                if option in range(0, len(course_set)):
+                    # can't index into a set, so iterate through
+                    for idx, course in enumerate(course_set):
+                        # if the option selected matches the current index
+                        if idx == option:
+                            # return the course as a string
+                            return course
+                else:
+                    # if the option isn't within the length of the set, start over
+                    continue
+            # yeah, enter an int
+            except ValueError:
+                print("Please enter a valid integer\n")
+            # idk what else could go wrong but let's handle it
+            except Exception as err:
+                print("something went wrong: " + str(err) + "\n")
