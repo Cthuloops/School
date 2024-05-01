@@ -1,3 +1,7 @@
+# functions for m7_project.py
+
+import csv
+
 
 # let's make this class I guess
 class Student():
@@ -60,7 +64,7 @@ class Student():
         self.__courses = courses
         self.__email = Student.set_email(self, stu_id, last_name)
 
-    def __repr__(self, delim='\n'):
+    def __repr__(self, delim=', '):
 
         return "ID: " + str(self.__stu_id) + delim + "First name: " + self.__first_name + delim + "Last name: " + self.__last_name + delim + "Major: " + self.__major + delim + "Email: " + self.__email
 
@@ -180,3 +184,26 @@ def write_instances(student_list, filename="student_registry_content.csv"):
                 writer.writerow(values)
     except Exception as err:
         print("Something went wrong: " + str(err))
+
+
+# menu because i like it
+def display_course_roster_menu(student_list):
+    """Menu for display course roster"""
+
+    print(f"{'Display Course Roster':-^29}")
+    print("1) Display available courses")
+    print("2) Search for course")
+    print("3) Return to Main Menu")
+    print(f"{'':-^29}")
+
+
+# lets get this bread
+def display_course_roster(student_list, course_to_search_for):
+    """Prints Students that have a course matching the search"""
+
+    course_to_search_for = "MAT143-Quantitative Literacy"
+
+    for student in student_list:
+        courses = student.get_courses()
+        if course_to_search_for in courses:
+            print(student)

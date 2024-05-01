@@ -52,13 +52,13 @@ student_registry = [{"student_id": "12376", "first_name": "Michael", "last_name"
 # main menu for the progam
 def main_menu():
     print()
-    print(f"{'Main Menu':-<41}")
+    print(f"{'Main Menu':-^41}")
     print("1) Write Registry Content CSV")
     print("2) Display Course Roster")
     print("3) List of Students by Major")
     print("4) Student Search by Id")
     print("5) Exit")
-    print(f"{'':-^41}\n")
+    print(f"{'':-^41}")
 
 
 # get int input, otherwise reprompt
@@ -68,7 +68,6 @@ def get_input():
     while (not valid_option):
         # capturing input as string so no error on incorrect input type
         option = input("Choose an option: ")
-        print()
         # checking if string is only digits, otherwise reprompt
         if option.isnumeric():
             # converting option into int
@@ -109,6 +108,7 @@ def main():
             # student associated w/ an id
             m7fun.search_by_id(student_list)
         elif option == 5:
+            print()
             print("Progam will now exit")
             keep_going = False
 
