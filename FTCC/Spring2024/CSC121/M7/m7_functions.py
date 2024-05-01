@@ -216,7 +216,6 @@ def get_course_to_display(student_list):
     # loop for printing courses and selecting a valid option
     keep_going = True
     while keep_going:
-        # not very clean code of me
         # print a menu of course selection options
         print()
         print(f"{'Choose a Course':^48}")
@@ -232,7 +231,8 @@ def get_course_to_display(student_list):
             keep_going = False
         else:
             try:
-                # convert option to int
+                # convert option to int, and subtract the one added in the
+                # list for readability
                 option = int(option) - 1
                 # if the option is within the number of courses
                 if option in range(0, len(course_set)):
@@ -251,3 +251,25 @@ def get_course_to_display(student_list):
             # idk what else could go wrong but let's handle it
             except Exception as err:
                 print("something went wrong: " + str(err) + "\n")
+
+
+def display_course_roster(student_list, course_to_display):
+    """Prints the students enrolled in the chosen course
+
+    Parameters
+    ----------
+    student_list : list[obj]
+        list of student objects
+    course : str
+        course to display students for
+    """
+    # for each student in student_list
+    for student in student_list:
+        # get the courses for that student
+        courses = student.get_courses()
+        # for each course in the student's courses
+        for course in courses:
+            # if the course matches the one being searched for
+            if course_to_display == course:
+                # print the student information
+                print(student)
