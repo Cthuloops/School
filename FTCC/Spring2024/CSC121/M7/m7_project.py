@@ -53,7 +53,7 @@ student_registry = [{"student_id": "12376", "first_name": "Michael", "last_name"
 def menu():
     print()
     print("Menu------------------------")
-    print("1) Display Registry Content")
+    print("1) Write Registry Content CSV")
     print("2) Display Course Roster")
     print("3) List of Students by Major")
     print("4) Student Search by Id")
@@ -99,8 +99,6 @@ def main():
         if option == 1:
             # write the list to a file
             m7fun.write_instances(student_list)
-            # display the contents of the list
-            m7fun.display_registry_content(student_list)
         elif option == 2:
             # displays the student information for a course
             m7fun.display_course_roster(student_list)
