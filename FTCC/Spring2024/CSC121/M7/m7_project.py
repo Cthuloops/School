@@ -5,7 +5,6 @@
 
 
 import m7_functions as m7fun
-import csv
 
 # initializing the dict list (20 dicts)
 student_registry = [{"student_id": "12376", "first_name": "Michael", "last_name": "Anderson", "major": "mech", "courses": ["mat143-quantitative literacy", "com120-intro interpersonal communication", "elc228-plc applications", "bpr115-electric/fluid power diagrams"]},
