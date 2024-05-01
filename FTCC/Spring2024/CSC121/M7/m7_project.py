@@ -7,13 +7,13 @@
 import m7_functions as m7fun
 
 # initializing the dict list (20 dicts)
-student_registry = [{"student_id": "12376", "first_name": "Michael", "last_name": "Anderson", "major": "mech", "courses": ["mat143-quantitative literacy", "com120-intro interpersonal communication", "elc228-plc applications", "bpr115-electric/fluid power diagrams"]},
+student_registry = [{"student_id": "12018", "first_name": "Michael", "last_name": "Anderson", "major": "Mech", "courses": ["PSY150-General Psychology", "COM120-Intro Interpersonal Communication", "ISC112-Industrial Safety", "BPR115-Electric/Fluid Power Diagrams"]},
 
                     {"student_id": "12415", "first_name": "Andrew", "last_name": "Jackson", "major": "UI/UX", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "DME110-Intro to Digital Media", "DME115-Graphic Design Tools"]},
 
                     {"student_id": "12302", "first_name": "Michelle", "last_name": "Robinson", "major": "UI/UX", "courses": ["ENG111-Writing and Inquiry", "MAT143-Quantitative Literacy", "DME115-Graphic Design Tools", "WEB110-Internet/Web Fundamentals"]},
 
-                    {"student_id": "12252", "first_name": "Carol", "last_name": "Flores", "major": "Mech", "courses": ["ENG111-Writing", "COM120-Intro Interpersonal Communication", "MAT143-Quantitative Literacy", "ELC228-PLC Applications"]},
+                    {"student_id": "12252", "first_name": "Carol", "last_name": "Flores", "major": "Mech", "courses": ["ENG111-Writing and Inquiry", "COM120-Intro Interpersonal Communication", "MAT143-Quantitative Literacy", "ELC228-PLC Applications"]},
 
                     {"student_id": "12338", "first_name": "George", "last_name": "Brown", "major": "UI/UX", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "DME110-Intro to Digital Media", "DME115-Graphic Design Tools"]},
 
@@ -68,6 +68,8 @@ def get_input():
     while (not valid_option):
         # capturing input as string so no error on incorrect input type
         option = input("Choose an option: ")
+        # taking care of spaces
+        option = option.strip()
         # checking if string is only digits, otherwise reprompt
         if option.isnumeric():
             # converting option into int
@@ -100,7 +102,7 @@ def main():
             m7fun.write_instances(student_list)
         elif option == 2:
             # displays the student information for a course
-            m7fun.display_course_roster_menu(student_list)
+            m7fun.display_course_roster(student_list)
         elif option == 3:
             # list of student for a major
             m7fun.list_by_major(student_list)
