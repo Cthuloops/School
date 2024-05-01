@@ -49,16 +49,16 @@ student_registry = [{"student_id": "12376", "first_name": "Michael", "last_name"
                     ]
 
 
-# menu for the progam
-def menu():
+# main menu for the progam
+def main_menu():
     print()
-    print("Menu------------------------")
+    print(f"{'Main Menu':-<41}")
     print("1) Write Registry Content CSV")
     print("2) Display Course Roster")
     print("3) List of Students by Major")
     print("4) Student Search by Id")
     print("5) Exit")
-    print("----------------------------\n")
+    print(f"{'':-^41}\n")
 
 
 # get int input, otherwise reprompt
@@ -93,7 +93,7 @@ def main():
     keep_going = True
     while (keep_going):
         # print the menu before choosing option and after choosing an option except exit
-        menu()
+        main_menu()
         option = get_input()
         # calls functions depending on the option chosen
         if option == 1:
@@ -101,7 +101,7 @@ def main():
             m7fun.write_instances(student_list)
         elif option == 2:
             # displays the student information for a course
-            m7fun.display_course_roster(student_list)
+            m7fun.display_course_roster_menu(student_list)
         elif option == 3:
             # list of student for a major
             m7fun.list_by_major(student_list)
