@@ -7,7 +7,7 @@
 import m7_functions as m7fun
 
 # initializing the dict list (20 dicts)
-student_registry = [{"student_id": "12018", "first_name": "Michael", "last_name": "Anderson", "major": "Mech", "courses": ["PSY150-General Psychology", "COM120-Intro Interpersonal Communication", "ISC112-Industrial Safety", "BPR115-Electric/Fluid Power Diagrams"]},
+student_registry = [{"student_id": "12019", "first_name": "Michael", "last_name": "Anderson", "major": "Mech", "courses": ["PSY150-General Psychology", "COM120-Intro Interpersonal Communication", "ISC112-Industrial Safety", "BPR115-Electric/Fluid Power Diagrams"]},
 
                     {"student_id": "12415", "first_name": "Andrew", "last_name": "Jackson", "major": "UI/UX", "courses": ["ACA122-College Transfer Success", "ENG111-Writing and Inquiry", "DME110-Intro to Digital Media", "DME115-Graphic Design Tools"]},
 
@@ -115,7 +115,7 @@ def main():
             if major_to_display is None:
                 continue
             # list of student for a major
-            m7fun.list_by_major(student_list)
+            m7fun.list_by_major(student_list, major_to_display)
         elif option == 4:
             # student associated w/ an id
             m7fun.search_by_id(student_list)
