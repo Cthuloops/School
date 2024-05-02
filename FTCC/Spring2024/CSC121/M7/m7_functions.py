@@ -269,7 +269,7 @@ def get_selection(student_list, search):
         for idx, item in enumerate(item_set):
             # numbering the items so its easier to select one
             print(f"{str(idx + 1):>2}) {item}")
-        print(f"{'':-^48}")
+        print(f"{'':-^{max_len}}")
         # get the input
         option = input("Select an option or enter 'q' to return to main menu: ")
         # check if returing to menu, returns None
@@ -293,10 +293,10 @@ def get_selection(student_list, search):
                     continue
             # yeah, enter an int
             except ValueError:
-                print("Please enter a valid integer\n")
+                print("Please enter a valid integer")
             # idk what else could go wrong but let's handle it
             except Exception as err:
-                print("something went wrong: " + str(err) + "\n")
+                print("something went wrong: " + str(err))
 
 
 # displays a the students registered to a course
@@ -336,5 +336,45 @@ def list_by_major(student_list, major_to_display):
     ----------
     student_list : list[obj]
         list of Student objects
-
+    major_to_display : str
+        major to display students for
     """
+    # some formatting
+    format_len = len(major_to_display)
+    print()
+    print(major_to_display)
+    print(f"{'':-^{format_len}}")
+    # for each student in student_list
+    for student in student_list:
+        # get the courses for that student
+        major = student.get_major()
+        # if the student is enrolled in the major
+        if major_to_display == major:
+            # print the student information
+            print(student)
+
+
+# searches and displays student info associated w/ an ID
+def search_by_id(student_list):
+    """Prompts user for ID and displays Student info associated with it
+
+    Parameters
+    ----------
+    student_list : list[obj]
+    """
+    keep_going = True
+    found = False
+    while keep_going:
+        print()
+        student_id = input("Enter a Student ID # or 'q' to return to Main Menu: ")
+        if student_id.lower() == 'q':
+            keep_going = False
+        else:
+            for student in student_list:
+                stu_id = student.get_stu_id()
+                if student_id == stu_id:
+                    print(student)
+                    found = True
+                    keep_going = False
+            if not found:
+                print("Student not found")
