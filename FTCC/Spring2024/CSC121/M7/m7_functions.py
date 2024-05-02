@@ -234,53 +234,26 @@ def create_item_set(student_list, search):
     return max_len, item_set
 
 
-def display_course_roster(student_list, course_to_display):
-    """Prints the students enrolled in the chosen course
+def get_selection(student_list, search):
+    """Calls create_item_set and prompts the user to make a selection, returns None or a string
 
     Parameters
     ----------
     student_list : list[obj]
-        list of student objects
-    course : str
-        course to display students for
+        list of Studeng objects
+    search : str
+        'major' or 'courses', changes the values in the set
+
+    Returns
+    -------
+    None
+
+    item : str
+        the major or course selected
     """
-    # getting the length of course_to_display for formatting purposes
-    format_len = len(course_to_display)
-    # some formatting
-    print()
-    print(course_to_display)
-    print(f"{'':-^{format_len}}")
-    # for each student in student_list
-    for student in student_list:
-        # get the courses for that student
-        courses = student.get_courses()
-        # for each course in the student's courses
-        for course in courses:
-            # if the course matches the one being searched for
-            if course_to_display == course:
-                # print the student information
-                print(student)
-
-
-# remake this thing
-def get_course_to_display(student_list, search):
-    item_set = set()
-    max_len = 0
-    for student in student_list:
-        if search == 'major':
-            major = student.get_major()
-            length = len(major)
-            if length > max_len:
-                max_len = length
-            item_set.add(major)
-        elif search == 'courses':
-            courses = student.get_courses()
-            for course in courses:
-                length = len(course)
-                if length > max_len:
-                    max_len = length
-                item_set.add(course)
-    item_set = sorted(item_set)
+    # get the max_len and item set
+    max_len, item_set = create_item_set(student_list, search)
+    # loop
     keep_going = True
     while keep_going:
         # print a menu of item selection options
@@ -288,7 +261,7 @@ def get_course_to_display(student_list, search):
         print(f"{'Choose a Course':^{max_len}}")
         print(f"{'':-^{max_len}}")
         for idx, item in enumerate(item_set):
-            # labeling the courses so its easier to select one
+            # numbering the items so its easier to select one
             print(f"{str(idx + 1):>2}) {item}")
         print(f"{'':-^48}")
         # get the input
@@ -318,3 +291,31 @@ def get_course_to_display(student_list, search):
             # idk what else could go wrong but let's handle it
             except Exception as err:
                 print("something went wrong: " + str(err) + "\n")
+
+
+def display_course_roster(student_list, course_to_display):
+    """Prints the students enrolled in the chosen course
+
+    Parameters
+    ----------
+    student_list : list[obj]
+        list of student objects
+    course : str
+        course to display students for
+    """
+    # getting the length of course_to_display for formatting purposes
+    format_len = len(course_to_display)
+    # some formatting
+    print()
+    print(course_to_display)
+    print(f"{'':-^{format_len}}")
+    # for each student in student_list
+    for student in student_list:
+        # get the courses for that student
+        courses = student.get_courses()
+        # for each course in the student's courses
+        for course in courses:
+            # if the course matches the one being searched for
+            if course_to_display == course:
+                # print the student information
+                print(student)
