@@ -101,13 +101,19 @@ def main():
             # write the list to a file
             m7fun.write_instances(student_list)
         elif option == 2:
-            # displays the student information for a course
-            course_to_display = m7fun.get_course_to_display(student_list)
+            # prompts user to select a course to display
+            course_to_display = m7fun.get_selection(student_list, search='courses')
             # if the user quit the menu option
             if course_to_display is None:
                 continue
+            # displays the student registered to a course
             m7fun.display_course_roster(student_list, course_to_display)
         elif option == 3:
+            # prompts user for major to display
+            major_to_display = m7fun.get_selection(student_list, search='major')
+            # if the user quit the menu option
+            if major_to_display is None:
+                continue
             # list of student for a major
             m7fun.list_by_major(student_list)
         elif option == 4:

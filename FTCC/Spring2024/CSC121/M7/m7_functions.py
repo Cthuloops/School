@@ -256,9 +256,15 @@ def get_selection(student_list, search):
     # loop
     keep_going = True
     while keep_going:
+        if search == 'courses':
+            menu_name = 'Choose a Course'
+        elif search == 'major':
+            menu_name = 'Choose a Major'
+        # adding 4 to max_len to account for formatting
+        max_len += 4
         # print a menu of item selection options
         print()
-        print(f"{'Choose a Course':^{max_len}}")
+        print(f"{menu_name:^{max_len}}")
         print(f"{'':-^{max_len}}")
         for idx, item in enumerate(item_set):
             # numbering the items so its easier to select one
@@ -293,6 +299,7 @@ def get_selection(student_list, search):
                 print("something went wrong: " + str(err) + "\n")
 
 
+# displays a the students registered to a course
 def display_course_roster(student_list, course_to_display):
     """Prints the students enrolled in the chosen course
 
@@ -300,7 +307,7 @@ def display_course_roster(student_list, course_to_display):
     ----------
     student_list : list[obj]
         list of student objects
-    course : str
+    course_to_display : str
         course to display students for
     """
     # getting the length of course_to_display for formatting purposes
@@ -319,3 +326,15 @@ def display_course_roster(student_list, course_to_display):
             if course_to_display == course:
                 # print the student information
                 print(student)
+
+
+# displays the students enrolled in the selected major
+def list_by_major(student_list, major_to_display):
+    """Prints the students enrolled in the chosen major
+
+    Parameters
+    ----------
+    student_list : list[obj]
+        list of Student objects
+
+    """
