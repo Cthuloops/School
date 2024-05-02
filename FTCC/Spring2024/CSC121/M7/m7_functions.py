@@ -186,71 +186,52 @@ def write_instances(student_list, filename="student_registry_content.csv"):
         print("Something went wrong: " + str(err))
 
 
-def get_course_to_display(student_list):
-    """Displays a selection of courses, returns the course selected or None
+def create_item_set(student_list, search):
+    """Creates a set of items from the student list, returns a tuple (int, set)
 
     Parameters
     ----------
     student_list : list[obj]
         list of Student objects
+    search : str
+        'major' or 'courses', changes the values in the set
 
     Returns
     -------
-    course : str
-        the course name selected
-    None
-        user chose to return to main menu
+    max_len : int
+        length of the longest string
+    item_set : set[str]
+        set of the items searched for
     """
-    # create a set of courses
-    course_set = set()
-    # for each student in the student list
+    # create the set
+    item_set = set()
+    # stuff for formatting
+    max_len = 0
+    # for each student
     for student in student_list:
-        # get their courses
-        courses = student.get_courses()
-        # for each course in the student's courses
-        for course in courses:
-            # add that course to the set
-            course_set.add(course)
-    # sort the course_set because i like it sorted
-    course_set = sorted(course_set)
-    # loop for printing courses and selecting a valid option
-    keep_going = True
-    while keep_going:
-        # print a menu of course selection options
-        print()
-        print(f"{'Choose a Course':^48}")
-        print(f"{'':-^48}")
-        for idx, course in enumerate(course_set):
-            # labeling the courses so its easier to select one
-            print(f"{str(idx + 1):>2}) {course}")
-        print(f"{'':-^48}")
-        # get the input
-        option = input("Select an option or enter 'q' to return to main menu: ")
-        # check if returing to menu, returns None
-        if option.casefold() == 'q':
-            keep_going = False
-        else:
-            try:
-                # convert option to int, and subtract the one added in the
-                # list for readability
-                option = int(option) - 1
-                # if the option is within the number of courses
-                if option in range(len(course_set)):
-                    # can't index into a set, so iterate through
-                    for idx, course in enumerate(course_set):
-                        # if the option selected matches the current index
-                        if idx == option:
-                            # return the course as a string
-                            return course
-                else:
-                    # if the option isn't within the length of the set, start over
-                    continue
-            # yeah, enter an int
-            except ValueError:
-                print("Please enter a valid integer\n")
-            # idk what else could go wrong but let's handle it
-            except Exception as err:
-                print("something went wrong: " + str(err) + "\n")
+        # if searching for major, add the major to the set
+        if search == 'major':
+            major = student.get_major()
+            # getting lengths for formatting
+            length = len(major)
+            if length > max_len:
+                max_len = length
+            item_set.add(major)
+        # if searching for courses
+        elif search == 'courses':
+            courses = student.get_courses()
+            # for each course in the list
+            for course in courses:
+                # get length for formatting
+                length = len(course)
+                if length > max_len:
+                    max_len = length
+                # add the course to the set
+                item_set.add(course)
+    # sort the set because it looks nice
+    item_set = sorted(item_set)
+    # return a tuple, length for formatting and then the item set
+    return max_len, item_set
 
 
 def display_course_roster(student_list, course_to_display):
@@ -279,3 +260,61 @@ def display_course_roster(student_list, course_to_display):
             if course_to_display == course:
                 # print the student information
                 print(student)
+
+
+# remake this thing
+def get_course_to_display(student_list, search):
+    item_set = set()
+    max_len = 0
+    for student in student_list:
+        if search == 'major':
+            major = student.get_major()
+            length = len(major)
+            if length > max_len:
+                max_len = length
+            item_set.add(major)
+        elif search == 'courses':
+            courses = student.get_courses()
+            for course in courses:
+                length = len(course)
+                if length > max_len:
+                    max_len = length
+                item_set.add(course)
+    item_set = sorted(item_set)
+    keep_going = True
+    while keep_going:
+        # print a menu of item selection options
+        print()
+        print(f"{'Choose a Course':^{max_len}}")
+        print(f"{'':-^{max_len}}")
+        for idx, item in enumerate(item_set):
+            # labeling the courses so its easier to select one
+            print(f"{str(idx + 1):>2}) {item}")
+        print(f"{'':-^48}")
+        # get the input
+        option = input("Select an option or enter 'q' to return to main menu: ")
+        # check if returing to menu, returns None
+        if option.casefold() == 'q':
+            keep_going = False
+        else:
+            try:
+                # convert option to int, and subtract the one added in the
+                # list for readability
+                option = int(option) - 1
+                # if the option is within the number of items
+                if option in range(len(item_set)):
+                    # can't index into a set, so iterate through
+                    for idx, course in enumerate(item_set):
+                        # if the option selected matches the current index
+                        if idx == option:
+                            # return the item as a string
+                            return item
+                else:
+                    # if the option isn't within the length of the set, start over
+                    continue
+            # yeah, enter an int
+            except ValueError:
+                print("Please enter a valid integer\n")
+            # idk what else could go wrong but let's handle it
+            except Exception as err:
+                print("something went wrong: " + str(err) + "\n")
