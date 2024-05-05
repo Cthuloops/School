@@ -95,6 +95,8 @@ def add_student_record(student_list):
     # while loop
     keep_going = True
     while keep_going:
+        # bool for controlling flow
+        valid_id = False
         # prompt for ID from user
         id = input("Enter new Student ID or 'q' to return to Main Menu: ")
         # q to return to main
@@ -107,15 +109,19 @@ def add_student_record(student_list):
                 # for each student in the list
                 for student in student_list:
                     # if the id exists already
-                    if id == student.get_stu_id():
+                    if id == int(student.get_stu_id()):
                         # tell the user and return to id input
                         print(f"{id} is already in use.\n")
-                        continue
+                        break
+                    # if id not in use already, allow appending to list
+                    valid_id = True
             # handle values other than 'q' and ints
             except ValueError:
                 print("Please enter a valid integer\n")
                 continue
-            fname = input("Enter the Student's first name: ")
-            lname = input("Enter the Student's last name: ")
-            student_list.append(student_class.Student(id, fname, lname))
-            return student_list
+            # append the new student to the student list
+            if valid_id:
+                fname = input("Enter the Student's first name: ")
+                lname = input("Enter the Student's last name: ")
+                student_list.append(student_class.Student(id, fname, lname))
+                return student_list
