@@ -7,6 +7,7 @@ import final_project_functions as fpf
 
 
 def main_menu():
+    """Prints the progams main menu"""
     print()
     print(f"{'Main Menu':^55}")
     print(f"{'':-^55}")
@@ -20,15 +21,23 @@ def main_menu():
 
 
 def get_option():
+    # while loop for getting the input
     option_not_valid = True
     while option_not_valid:
+        # prompt user for a selection
         option = input("Please select an option: ")
+        # check if the input is an int and within range of available options
         try:
             option = int(option)
             if option in range(1, 7):
                 return option
+            else:
+                print("Please enter a valid menu choice (1 - 6)")
+                main_menu()
+                continue
         except ValueError:
-            print("Please enter a valid integer.\n")
+            print("Please enter a valid integer.")
+            main_menu()
             continue
         except Exception as err:
             print("Something went wrong: " + str(err))
@@ -42,6 +51,12 @@ def main():
         option = get_option()
         if option == 1:
             student_list = fpf.read_content()
+            fpf.write_report(student_list)
+        elif option == 2:
+            student_list = fpf.add_student_record(fpf.read_content())
+            if student_list is None:
+                continue
+            fpf.write_report(student_list)
         elif option == 6:
             keep_going = False
 
