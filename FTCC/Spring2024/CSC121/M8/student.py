@@ -71,7 +71,8 @@ class Student:
         -------
         login (str) : login generated for the student
         """
-        return last_name[:5].lower() + str(stu_id[-3:])
+        stud_id = str(stu_id)
+        return last_name[:5].lower() + stud_id[-3:]
 
     def set_email(self, login):
         """Sets an email for the students
