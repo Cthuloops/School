@@ -91,6 +91,31 @@ def write_report(student_list):
             print(f"{student_info[0]:<9}{student_info[1]:<{fname_len + 1}}{student_info[2]:<{lname_len + 1}}{student_info[3]:<9}{str(student_info[4]):<7}{student_info[5]:<}", file=txt_file)
 
 
-if __name__ == "__main__":
-    student_list = read_content()
-    write_report(student_list)
+def add_student_record(student_list):
+    # while loop
+    keep_going = True
+    while keep_going:
+        # prompt for ID from user
+        id = input("Enter new Student ID or 'q' to return to Main Menu: ")
+        # q to return to main
+        if id.lower() == 'q':
+            return None
+        else:
+            # try to convert id to int
+            try:
+                id = int(id)
+                # for each student in the list
+                for student in student_list:
+                    # if the id exists already
+                    if id == student.get_stu_id():
+                        # tell the user and return to id input
+                        print(f"{id} is already in use.\n")
+                        continue
+            # handle values other than 'q' and ints
+            except ValueError:
+                print("Please enter a valid integer\n")
+                continue
+            fname = input("Enter the Student's first name: ")
+            lname = input("Enter the Student's last name: ")
+            student_list.append(student_class.Student(id, fname, lname))
+            return student_list
