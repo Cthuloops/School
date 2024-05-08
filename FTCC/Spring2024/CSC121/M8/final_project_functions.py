@@ -47,7 +47,7 @@ def get_lengths(student_list):
         lname_len = len(student.get_last_name())
         if lname_len > max_lname_len:
             max_lname_len = lname_len
-        # get the max lenght of student emails
+        # get the max length of student emails
         email_len = len(student.get_email())
         if email_len > max_email_len:
             max_email_len = email_len
@@ -91,12 +91,17 @@ def write_report(student_list):
             print(f"{student_info[0]:<9}{student_info[1]:<{fname_len + 1}}{student_info[2]:<{lname_len + 1}}{student_info[3]:<9}{str(student_info[4]):<7}{student_info[5]:<}", file=txt_file)
 
 
+def update_student_info(id, last, first):
+    with open("StudentInfo.csv", "at", newline='') as csv_file:
+        print(f"{last},{first},{id}", file=csv_file)
+
+
 def add_student_record(student_list):
     # while loop
     keep_going = True
     while keep_going:
         # bool for controlling flow
-        valid_id = False
+        valid_id = True
         # prompt for ID from user
         id = input("Enter new Student ID or 'q' to return to Main Menu: ")
         # q to return to main
@@ -112,9 +117,8 @@ def add_student_record(student_list):
                     if id == int(student.get_stu_id()):
                         # tell the user and return to id input
                         print(f"{id} is already in use.\n")
+                        valid_id = False
                         break
-                    # if id not in use already, allow appending to list
-                    valid_id = True
             # handle values other than 'q' and ints
             except ValueError:
                 print("Please enter a valid integer\n")
@@ -123,5 +127,41 @@ def add_student_record(student_list):
             if valid_id:
                 fname = input("Enter the Student's first name: ")
                 lname = input("Enter the Student's last name: ")
+                update_student_info(id, lname, fname)
                 student_list.append(student_class.Student(id, fname, lname))
                 return student_list
+
+
+#def delete_student_record(student_list):
+#    # while loop
+#    keep_going = True
+#    while keep_going:
+#        id_exists = False
+#        # prompt for id
+#        id = input("Enter Student ID for deletion or 'q' to return to Main Menu: ")
+#        # q to return to main
+#        if id.lower() == 'q':
+#            return None
+#        else:
+#            # try to convert id to int
+#            try:
+#                id = int(id)
+#                # for each student in the list
+#                for student in student_list:
+#                    # if the id exists already
+#                    if id == int(student.get_stu_id()):
+#                        id_exists = True
+#                        # set the student to inactive
+#                        student.set_active()
+#                if not id_exists:
+#                    # if the student isn't found
+#                    print("Student ID not found\n")
+#                    continue
+#                else:
+#                    print("Student deactivated")
+#            except ValueError:
+#                print("Please enter a valid integer\n")
+#                continue
+#    for student in student_list:
+#        print(student)
+#        return student_list
