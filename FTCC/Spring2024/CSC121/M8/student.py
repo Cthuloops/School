@@ -27,7 +27,7 @@ class Student:
     set_email():
         returns an email address for the student
     set_active():
-        changes a students active status (True -> False)||(False -> True)
+        changes a students active status (True -> False)
     get_stu_id():
         returns the student's ID
     get_first_name():
@@ -84,13 +84,7 @@ class Student:
         return self.__login + "@student.faytechcc.edu"
 
     def set_active(self):
-        """Changes the active status for a student
-
-        Returns
-        -------
-        True (bool) : if the active status is False, returns True
-        False (bool) : if the active status is True, returns False
-        """
+        """Changes the active status for a student to False"""
         self.__active = False
 
     def get_stu_id(self):
