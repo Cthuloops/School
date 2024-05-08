@@ -9,6 +9,7 @@ import csv
 
 # reads a csv file and converts the info into a list of Student objects
 def read_content():
+    """Reads StudentInfo.csv and creates Student instances, returns list of objects"""
     try:
         with open("StudentInfo.csv", 'rt', newline='') as csv_file:
             # eating the header
@@ -32,6 +33,7 @@ def read_content():
 
 # just a helper function for formatting
 def get_lengths(student_list):
+    """Gets formatting information, returns int, int, int"""
     header = ['Last Name', 'First Name', 'Email']
     max_fname_len = 0
     max_lname_len = 0
@@ -60,6 +62,7 @@ def get_lengths(student_list):
 
 # creates a txt and csv file
 def write_report(student_list):
+    """Writes two files, one csv and one txt"""
     header_csv = ['ID #', 'Last Name', 'First Name', 'Login', 'Email', 'Active']
     # open the csv to write
     with open("student_accounts.csv", 'w', newline='') as csv_file:
@@ -92,11 +95,13 @@ def write_report(student_list):
 
 
 def update_student_info(id, last, first):
+    """Adds student added from add_student_record to StudentInfo.csv"""
     with open("StudentInfo.csv", "at", newline='') as csv_file:
         print(f"{last},{first},{id}", file=csv_file)
 
 
 def add_student_record(student_list):
+    """Adds student record, returns list of Student instances"""
     # while loop
     keep_going = True
     while keep_going:
@@ -133,6 +138,7 @@ def add_student_record(student_list):
 
 
 def delete_student_record(student_list):
+    """Sets a Student instance active attribute to False, returns a list of Student instances"""
     # while loop
     keep_going = True
     while keep_going:
@@ -166,6 +172,7 @@ def delete_student_record(student_list):
 
 
 def search_by_last_name(student_list):
+    """Searches student list, prints instance if found"""
     # while loop
     keep_going = True
     while keep_going:
@@ -191,6 +198,7 @@ def search_by_last_name(student_list):
 
 
 def search_by_id(student_list):
+    """Searches student list, prints instance if found"""
     # while loop
     keep_going = True
     while keep_going:
