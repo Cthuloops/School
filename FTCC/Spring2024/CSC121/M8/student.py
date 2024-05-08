@@ -91,10 +91,7 @@ class Student:
         True (bool) : if the active status is False, returns True
         False (bool) : if the active status is True, returns False
         """
-        if self.__active is True:
-            return False
-        else:
-            return True
+        self.__active = False
 
     def get_stu_id(self):
         """Used to access stu_id attribute
