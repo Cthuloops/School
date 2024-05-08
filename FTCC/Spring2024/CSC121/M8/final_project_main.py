@@ -21,6 +21,7 @@ def main_menu():
 
 
 def get_option():
+    """Gets user input, returns int"""
     # while loop for getting the input
     option_not_valid = True
     while option_not_valid:
@@ -45,6 +46,7 @@ def get_option():
 
 
 def main():
+    # call read_content to build the initial list of student instances
     keep_going = True
     while keep_going:
         main_menu()
@@ -57,6 +59,17 @@ def main():
             if student_list is None:
                 continue
             fpf.write_report(student_list)
+        elif option == 3:
+            student_list = fpf.delete_student_record(fpf.read_content())
+            if student_list is None:
+                continue
+            fpf.write_report(student_list)
+        elif option == 4:
+            student_list = fpf.read_content()
+            fpf.search_by_last_name(student_list)
+        elif option == 5:
+            student_list = fpf.read_content()
+            fpf.search_by_id(student_list)
         elif option == 6:
             keep_going = False
 
