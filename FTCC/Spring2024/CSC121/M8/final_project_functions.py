@@ -27,7 +27,7 @@ def read_content():
     except FileNotFoundError:
         print("StudentInfo.csv not found in the current directory")
     except Exception as err:
-        print("Something went wrong: " + str(err))
+        print("Something went wrong in read_content: " + str(err))
 
 
 # just a helper function for formatting
@@ -132,36 +132,89 @@ def add_student_record(student_list):
                 return student_list
 
 
-#def delete_student_record(student_list):
-#    # while loop
-#    keep_going = True
-#    while keep_going:
-#        id_exists = False
-#        # prompt for id
-#        id = input("Enter Student ID for deletion or 'q' to return to Main Menu: ")
-#        # q to return to main
-#        if id.lower() == 'q':
-#            return None
-#        else:
-#            # try to convert id to int
-#            try:
-#                id = int(id)
-#                # for each student in the list
-#                for student in student_list:
-#                    # if the id exists already
-#                    if id == int(student.get_stu_id()):
-#                        id_exists = True
-#                        # set the student to inactive
-#                        student.set_active()
-#                if not id_exists:
-#                    # if the student isn't found
-#                    print("Student ID not found\n")
-#                    continue
-#                else:
-#                    print("Student deactivated")
-#            except ValueError:
-#                print("Please enter a valid integer\n")
-#                continue
-#    for student in student_list:
-#        print(student)
-#        return student_list
+def delete_student_record(student_list):
+    # while loop
+    keep_going = True
+    while keep_going:
+        id_exists = False
+        # prompt for id
+        id = input("Enter Student ID for deletion or 'q' to return to Main Menu: ")
+        # q to return to main
+        if id.lower() == 'q':
+            return None
+        else:
+            # try to convert id to int
+            try:
+                id = int(id)
+                # for each student in the list
+                for student in student_list:
+                    # if the id exists already
+                    if id == int(student.get_stu_id()):
+                        id_exists = True
+                        # set the student to inactive
+                        student.set_active()
+                if not id_exists:
+                    # if the student isn't found
+                    print("Student ID not found\n")
+                    continue
+                else:
+                    print("Student deactivated")
+            except ValueError:
+                print("Please enter a valid integer\n")
+                continue
+        return student_list
+
+
+def search_by_last_name(student_list):
+    # while loop
+    keep_going = True
+    while keep_going:
+        lname_exists = False
+        # prompt for last name
+        lname = input("Enter Student last name to search for or 'q' to return to Main Menu: ")
+        # q to return to main
+        if lname.lower() == 'q':
+            keep_going = False
+        else:
+            # for each student in the list
+            for student in student_list:
+                if lname == student.get_last_name():
+                    lname_exists = True
+            if lname_exists:
+                # the student is found
+                print()
+                print(student)
+                print()
+            else:
+                print("Student not found\n")
+                continue
+
+
+def search_by_id(student_list):
+    # while loop
+    keep_going = True
+    while keep_going:
+        id_exists = False
+        # prompt for id
+        id = input("Enter Student ID for deletion or 'q' to return to Main Menu: ")
+        # q to return to main
+        if id.lower() == 'q':
+            keep_going = False
+        else:
+            # try to convert id to int
+            try:
+                id = int(id)
+                # for each student in the list
+                for student in student_list:
+                    if id == int(student.get_stu_id()):
+                        id_exists = True
+                        print()
+                        print(student)
+                        print()
+                if not id_exists:
+                    # if the student isn't found
+                    print("Student not found\n")
+                    continue
+            except ValueError:
+                print("Please enter a valid integer\n")
+                continue
