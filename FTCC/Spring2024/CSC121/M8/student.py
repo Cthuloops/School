@@ -57,8 +57,8 @@ class Student:
         self.__stu_id = stu_id
         self.__first_name = first_name
         self.__last_name = last_name
-        self.__login = Student.set_login(self, self.__stu_id, self.__last_name)
-        self.__email = Student.set_email(self, self.__login)
+        self.__login = self.set_login(self, self.__stu_id, self.__last_name)
+        self.__email = self.set_email(self, self.__login)
         self.__active = True
 
     def __repr__(self, delim=', '):
