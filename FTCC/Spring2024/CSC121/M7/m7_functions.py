@@ -62,7 +62,7 @@ class Student():
         self.__last_name = last_name
         self.__major = major
         self.__courses = courses
-        self.__email = Student.set_email(self, stu_id, last_name)
+        self.__email = self.set_email(self, stu_id, last_name)
 
     def __repr__(self, delim=', '):
 
